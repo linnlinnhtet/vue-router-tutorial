@@ -41,8 +41,8 @@
           >
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/logout"
-            >Logout <span class="sr-only">(current)</span></router-link
+          <a class="nav-link" href="#" @click="logout"
+            >Logout <span class="sr-only">(current)</span></a
           >
         </li>
       </ul>
@@ -52,6 +52,12 @@
 
 <script>
 export default {
-  name: "MenuBar"
+  name: "MenuBar",
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push("/login");
+    }
+  }
 };
 </script>

@@ -15,10 +15,24 @@ const routes = [
     { path: '/login', component: Login },
     { path: '/products', component: ProductHome },
     { path: '/products/:id', component: ProductDetail },
-    { path: '/profile', component: Profile },
+    {
+        path: '/profile', component: Profile
+    },
 ];
 const router = new VueRouter({
     mode: 'history',
     routes
 });
+router.beforeEach((to, from, next) => {
+    if (to.path === '/profile' || to.path === '/products') {
+        let auth = localStorage.getItem('auth');
+        if (auth) {
+            next();
+        } else {
+            next('/login');
+        }
+    } else {
+        next()
+    }
+})
 export default router;
